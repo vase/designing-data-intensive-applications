@@ -54,7 +54,7 @@ Secondly, demanding or wide-ranging application requirements means a single tool
 
 Figure 1-1: One possible architecture for a data system that combines several components
 
-![Figure 1-1](https://github.com/vasetech/designing-data-intensive-applications/assets/figure-1-1.png "Architecture with several data systems")
+![Figure 1-1](https://github.com/vasetech/designing-data-intensive-applications/blob/master/assets/figure-1-1.png?raw=true "Architecture with several data systems")
 
 When you combine several tools to provide a service, the service's API hides implementation details from clients. You have essentially created a new, special-purpose data system from smaller, general-purpose components. Your composite data system may provide certain guarantees. E.g: correctly invalidated/updated cache on writes for consistent results
 
@@ -146,10 +146,10 @@ SELECT tweets.*, users.* FROM tweets
   WHERE follows.follower_id = current_user
 ```
 Figure 1-2: Simple relational schema for implementing a Twitter home timeline<br/>
-![Figure 1-2](https://github.com/vasetech/designing-data-intensive-applications/assets/figure-1-2.png "Simple relational schema for implementing a Twitter home timeline") <br/><br/>
+![Figure 1-2](https://github.com/vasetech/designing-data-intensive-applications/blob/master/assets/figure-1-2.png?raw=true "Simple relational schema for implementing a Twitter home timeline") <br/><br/>
 1. Maintain a cache for each user's home timeline. When a user posts a tweet, look up that user's followers and insert the new tweet into each follower's timeline cache.<br/><br/>
 Figure 1-3: Twitter's data pipeline for delivering tweets to followers, with load parameters
-![Figure 1-3](https://github.com/vasetech/designing-data-intensive-applications/assets/figure-1-3.png "Twitter's data pipeline for delivering tweets to followers, with load parameters")
+![Figure 1-3](https://github.com/vasetech/designing-data-intensive-applications/blob/master/assets/figure-1-3.png?raw=true "Twitter's data pipeline for delivering tweets to followers, with load parameters")
 
 In the example of Twitter, the distribution of followers per user is a key load parameter for discussing scalability, since it determines the fan-out load.
 
@@ -167,7 +167,7 @@ Both questions require **performance numbers**. E.g:
 
  Figure 1-4: Illustrating mean and percentiles: response times for a sample of 100 requests to a service
 
- ![Figure 1-4](https://github.com/vasetech/designing-data-intensive-applications/assets/figure-1-4.png "Illustrating mean and percentiles: response times for a sample of 100 requests to a service")
+ ![Figure 1-4](https://github.com/vasetech/designing-data-intensive-applications/blob/master/assets/figure-1-4.png?raw=true "Illustrating mean and percentiles: response times for a sample of 100 requests to a service")
 
 The mean is not a good metric if you want to know your "typical" response time. It doesn't tell you how many users actually experienced that delay.
 
@@ -205,8 +205,35 @@ To minimize pain during maintenance and thus avoid creating legacy software ours
 ### Operability: Making Life Easy for Operations
 > Make it easy for operations teams to keep the system running smoothly.
 
+Operations team are vital to keeping a software system running smoothly. Some of their typical responsibility:
+* Monitoring the health of the system and quickly restoring service if it goes into a bad state
+* Tracking down the cause of problems, such as system failures or degraded performance
+* Keeping software and platforms up to date, including security patches, etc.
+
+Good operability means making routine tasks easy, allowing the operations team to focus their efforts on high-value activities. Data systems can do various things to make routine tasks easy. E.g:
+* Providing visibility into the runtime behavior and internals of the system, with good monitoring
+* Providing good support for automation and integration with standard tools
+* Avoiding dependency on individual machines (allowing machines to be taken down for maintenance while the system as a whole continues running uninterrupted)
+
 ### Simplicity: Managing Complexity
 > Make it easy for new engineers to understand the system, by removing as much complexity as possible from the system.
 
+As projects get larger, they often become very complex and difficult to understand. The complexity slows down everyone working on the system, increase maintenance cost. Various symptoms of complexity: *explosion of state space, tight coupling of modules, tangled dependencies, inconsistent naming, ad-hoc workarounds, etc*
+
+When complexity makes maintenance hard, budget and schedules are often overrun. There is also a greater risk of introducing bugs when making a change (Hard to reason, hidden assumptions, unintended consequences).
+
+Making a system simpler doesn't necessarily mean reducing its functionality; it can also mean removing *accidental complexity*. Complexity is accidental if it is not inherent in the problem to be solved, but arises only from the implementation.
+
+One of best tool to remove accidental complexity is *abstraction*. A good abstraction can hide a great deal of implementation details behind a clean, simple-to-understand facade. It encourages reuse and lead to higher-quality software, as quality improvements in the abstracted component benefit all applications that use it. E.g: *high-level programming languages hide machine code, CPU registers and syscalls. SQL abstracts complex data structures, concurrent requests and inconsistency management*
+
+However, finding good abstractions is very hard. In the field of distributed systems, although there are many good algorithms, it's much less clear how we should be packaging them into abstractions to keep complexity of the system manageable.
+
+
 ### Evolvability: Making Change Easy
 > Make it easy for engineers to make changes to the system in the future, adapting it for unanticipated use cases as requirements change. Also known as extensibility, modifiability, or plasticity.
+
+System's requirements are likely to be in constant flux: *You learn new facts, unanticipated use cases emerge, business pririty changes, new user requests, regulatory change, scaling etc.*
+
+In terms of organizational processes, *Agile* working pattern provides a framework for adapting to change, via test-driven development (TDD) and refactoring.
+
+The ease with which you can modify a data system, adapting it to changing requirements, is closely linked to its simplicity and abstractions.
