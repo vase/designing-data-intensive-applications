@@ -1,5 +1,5 @@
 # Chapter 1. Reliable, Scalable and Maintainable Applications
----
+
 ## Summary
 > This chapter explores some of the fundamental ways of thinking about data-intensive applications. These principles will guide reader through the rest of the book, where technical details are the focus.
 
@@ -147,7 +147,7 @@ SELECT tweets.*, users.* FROM tweets
 ```
 Figure 1-2: Simple relational schema for implementing a Twitter home timeline<br/>
 ![Figure 1-2](https://github.com/vasetech/designing-data-intensive-applications/blob/master/assets/figure-1-2.png?raw=true "Simple relational schema for implementing a Twitter home timeline") <br/><br/>
-1. Maintain a cache for each user's home timeline. When a user posts a tweet, look up that user's followers and insert the new tweet into each follower's timeline cache.<br/><br/>
+2. Maintain a cache for each user's home timeline. When a user posts a tweet, look up that user's followers and insert the new tweet into each follower's timeline cache.<br/><br/>
 Figure 1-3: Twitter's data pipeline for delivering tweets to followers, with load parameters
 ![Figure 1-3](https://github.com/vasetech/designing-data-intensive-applications/blob/master/assets/figure-1-3.png?raw=true "Twitter's data pipeline for delivering tweets to followers, with load parameters")
 
