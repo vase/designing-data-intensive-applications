@@ -112,6 +112,4 @@ Store all values of colums together in a file to make query easier
 > We have learn that storing data differently has their own advantages. Since we are already having redundant databases as backup, it is wise to store backup data in different ways to make full use.
 
 # Data Cubes: Materialized view
-have data cube t to compute aggregrations every time new data is added in to reduce query time by analysts.
-
-* 
+Have data cube t to compute aggregrations every time new data is added in to reduce query time by analysts.
