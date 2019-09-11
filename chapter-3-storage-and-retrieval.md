@@ -1,4 +1,4 @@
-# Chapter 3. Storaage and Retrieval
+# Chapter 3. Storage and Retrieval
 
 ## Summary
 
