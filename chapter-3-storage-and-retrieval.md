@@ -9,8 +9,8 @@
   * Set function - good performance, becasue just need to append after last
   * Get function - bad performance, needs to scan entire database from beginning to end
       > bad performance of "get" method solved using index
-  * index is an additional data structure that does not effect the content of the database
-  * index slows down write, speed up query. Need to find the balance
+  * Index is an additional data structure that does not effect the content of the database
+  * Index slows down write, speed up query. Need to find the balance
   * Storage engines is categorised into 2 main catogories:
     * Optimized for transsaction processing (OLTP - Online Transaction Processing)
     * Optimized for analytics (OLAP - Online Analytical Processing)
@@ -45,7 +45,7 @@ Constructing and maintaining SSTalbes
 > Log-Structured Merged Tree: Keeping a cascade of SSTables that are merged in the background
 
 # B-Trees
-* Only similarity with SSTables is that key-value pair is sorted b key
+* Only similarity with SSTables is that key-value pair is sorted by key
 * B-Trees breaks databse down into fixed sized blocks or pages where each page can be identified using an address or location.
 ![5](https://user-images.githubusercontent.com/35839199/64676106-5d36a500-d4a7-11e9-8e90-e1bd783bcdb2.png)
 * Branching factor: number of references to child pages in one page
@@ -93,7 +93,7 @@ Making B-Trees Reliable
 # Online Transaction Processing (OLTP)
 Allowing clients to make low-latenct reads and writes as opposed to batch processing jobs which only run preiodically
 
-# Online Aanalytical Processing (OLAP)
+# Online Analytical Processing (OLAP)
 A seperate database optimized for analytics called a data warehouse
 * Contain read only data that id derived from OLTP systems through ETL process
 
@@ -101,7 +101,7 @@ A seperate database optimized for analytics called a data warehouse
 * made up of fact table and dimension table
 * in snowflake data structure, dimension table have further branch of dimension tables
 
-# Column Oriented Sotrage
+# Column Oriented Storage
 Store all values of colums together in a file to make query easier
 * Can be compressed through column compression (bitmap indexed storage)
 * Allows vectorized processing
