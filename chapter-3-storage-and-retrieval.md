@@ -113,3 +113,4 @@ Store all values of colums together in a file to make query easier
 
 # Data Cubes: Materialized view
 Have data cube t to compute aggregrations every time new data is added in to reduce query time by analysts.
+![7](https://user-images.githubusercontent.com/35839199/64683466-de953400-d4b5-11e9-91ae-ac9fa473ca68.png)
