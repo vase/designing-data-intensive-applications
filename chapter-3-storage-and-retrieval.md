@@ -41,7 +41,7 @@ Constructing and maintaining SSTalbes
 * When a write comes in, add it to an in-memory balanced tree data structure (red-black tree). This in-memory tree is often called a memtable
 * Writes to disk as SSTable when memtable gets bigger than some treashold
 * To serve read request, start finding key from most recent segment to least reent segment
-* Run Merging and compaction from time to time
+* Run merging and compaction from time to time
 > Log-Structured Merged Tree: Keeping a cascade of SSTables that are merged in the background
 
 # B-Trees
@@ -56,8 +56,8 @@ Constructing and maintaining SSTalbes
 Making B-Trees Reliable
 * Basic underlying write operation in B-tree is to overwrite a page on disc
 * Can be dangerous because database crash during write operation can end up in corrupted index
-* Solved with write ahead log (WAL). Makes sure modfication must be written before it can be applied to the pages.
-* Insead of using WAL, some databases uses copy0on-write scheme where modified pae is written in different location
+* Solved with Write Ahead Log (WAL). Makes sure modfication must be written before it can be applied to the pages.
+* Insead of using WAL, some databases uses copy-on-write scheme where modified pae is written in different location
 
 # Comparison of B-Trees and LSM Trees
 
@@ -85,21 +85,25 @@ Making B-Trees Reliable
   
   # Why keeping everyting in memory?
   * RAM has become cheaper over time
-  * New ways of database backup with battery-powered TAM
+  * New ways of database backup with battery-powered RAM
   * Files on disc can easily be backed up, inspected and analyzed by external utilities
   * Removes all overheads acssociated with managing on disk data structures
   * Avoid the overheads of encoding in-memory data structures in a form that can be written to disk
   
 # Online Transaction Processing (OLTP)
 Allowing clients to make low-latenct reads and writes as opposed to batch processing jobs which only run preiodically
+Reference to the book page 90
 
 # Online Analytical Processing (OLAP)
 A seperate database optimized for analytics called a data warehouse
-* Contain read only data that id derived from OLTP systems through ETL process
+* Contain read only data that is derived from OLTP systems through ETL process
+![8](https://user-images.githubusercontent.com/35839199/64687344-e4dade80-d4bc-11e9-9939-20cb43f720d3.png)
 
 # Stars and snowflakes
-* made up of fact table and dimension table
-* in snowflake data structure, dimension table have further branch of dimension tables
+![10](https://user-images.githubusercontent.com/35839199/64688635-54ea6400-d4bf-11e9-8187-83422359bd21.png)
+* Made up of "fact table" and "dimension table"
+* In snowflake data structure, dimension table have further branch of dimension tables
+![9](https://user-images.githubusercontent.com/35839199/64688478-0046e900-d4bf-11e9-9fa1-0bda5062cffc.png)
 
 # Column Oriented Storage
 Store all values of colums together in a file to make query easier
@@ -112,5 +116,5 @@ Store all values of colums together in a file to make query easier
 > We have learn that storing data differently has their own advantages. Since we are already having redundant databases as backup, it is wise to store backup data in different ways to make full use.
 
 # Data Cubes: Materialized view
-Have data cube t to compute aggregrations every time new data is added in to reduce query time by analysts.
+Have data cube to compute aggregrations every time new data is added in to reduce query time by analysts.
 ![7](https://user-images.githubusercontent.com/35839199/64683466-de953400-d4b5-11e9-91ae-ac9fa473ca68.png)
