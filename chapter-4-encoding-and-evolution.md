@@ -44,7 +44,7 @@ Non-language-specific:
     
     - Popular ones can be consumed and produced by many programming languages
     - Human readable is good for debugging and for working with non-programmers
-    - Flexible to add on to (no need for schema, does not require same structure to be parsed)
+    - Flexible to add on to (no need for schema, order matters less)
     </details>
     <details>
     <summary>Bad things</summary>
@@ -130,9 +130,9 @@ Language-specific
 - Efficiency and backwards and forwards compatibility may be an issue
 </details>
 
-### Considerations for forward and backward compatibility in binary encoding
-Forward compatibility means that you can have a new version of the schema as writer and an old version of the schema as reader.
-Conversely, backward compatibility means that you can have a new version of the schema as reader and an old version as writer.
+### Schema evolution - onsiderations for forward and backward compatibility in binary encoding
+Forward compatibility means that you can have a new version of the schema as writer and an old version of the schema as reader. Conversely, backward compatibility means that you can have a new version of the schema as reader and an old version as writer.
+
 For detailed information, google [schema evolution](https://en.wikipedia.org/wiki/Schema_evolution)
 **Field tags**
 
@@ -152,8 +152,22 @@ Backward compatibility - Issues may arise moving from single-valued to multi-val
 - If the code reading the data expects some field, but the writer's schema does not contain a field of that name, it is filled in with a default value declared in the reader's schema.
 
 
-## How do computers pass messages along?
+## Some common ways computers pass messages along
 Methods mentioned in the book:
 - Databases
-- APIs
-- Message-brokers
+  - Backwards compatibility very important
+  - Having to serve multiple versions of an application makes forwards compatibility important
+  - Be careful when reconstructing and deconstructing encoded data (older versions of an application might construct an object with default/missing values that is then rewritten into the database)
+  - Warehousing consideration: data dump should be encoded with the latest schema for consistency
+- Services
+  - Remote Procedure Calls broadly, REST, SOAP, custom specifically
+  - Limitations of network requests apply
+  - Backwards and forwards compatibility properties inherited from encoding
+  - APIs limit what is exposed and can be queried, as well as the methods of querying
+  - Client and service may have different programming languages and hence datatypes
+  - Long-term backwards compatibility is important because it's hard to ensure clients are using updated schema
+  - Can result in having to maintain many different versions of the API side by side
+  - If we assume that servers are updated first and clients second, then we only need backwards compatibility on requests, and forwards compatibility on responses
+- Message-passing
+  - Usually one-way dataflow with no response
+  - Message brokers, distributed actor model
