@@ -108,7 +108,9 @@ Many of the above binary encoding methods use type annotations, length indicator
   }
   ```
 
-  converted to Avro, which uses none of the above, instead relying on specifying the length of bytes to tell when an entry begins and ends:
+  You can have a look at [how Protobuf encoding works in detail](https://developers.google.com/protocol-buffers/docs/encoding)
+  
+  converted to Avro, which, in the encoded data, only specifies the length of bytes to tell when an entry begins and ends:
 
   ![Avro encoding](https://notes.shichao.io/dda/figure_4-5_600.png)
 
