@@ -1,5 +1,6 @@
 # Chapter 4 - Encoding and Evolution
 Link to someone's upload of the original chapter: https://notes.shichao.io/dda/ch4/
+
 On how computers and programs write and send each other and themselves messages.
 <details>
 <summary>Why can't computers just write letters to each other?</summary>
