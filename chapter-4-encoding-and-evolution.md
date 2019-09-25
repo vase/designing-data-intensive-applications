@@ -83,6 +83,11 @@ Non-language-specific:
     - MessagePack
     
 Many of the above binary encoding methods use type annotations, length indicators, and/or a field tag, plus the data from the entry itself. The field tags are tied to the keys of the original data, either manually (Thrift or Protocol Buffers) or programmatically. Fields may be specified to be required.
+
+**Examples:**
+
+Source JSON:
+
   ```
   {
       "userName": "Martin",
