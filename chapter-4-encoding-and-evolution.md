@@ -136,6 +136,7 @@ Language-specific
 Forward compatibility means that you can have a new version of the schema as writer and an old version of the schema as reader. Conversely, backward compatibility means that you can have a new version of the schema as reader and an old version as writer.
 
 For detailed information, google [schema evolution](https://en.wikipedia.org/wiki/Schema_evolution)
+
 **Field tags**
 
 Forward compatibility - If, as the examples show, field tags are tied to each unique key, an introduction of a new key must be accompanied by the introduction of a new field tag. 
