@@ -36,7 +36,7 @@ Often at the cost of human readability, different encodings allow us to use repr
 
 ## How do we do encoding?
 
-### What are the most common encoding methods, and how do they do their thing?
+### What are the most common encoding methods?
 Non-language-specific:
   - Human readable(non-binary):
     <details>
@@ -146,7 +146,7 @@ Backward compatibility - You can't add a new required field, except if you speci
 
 Backward compatibility - Issues may arise moving from single-valued to multi-valued (eg. array) fields; Another example is converting numerical data - 32bit to 64bit. Issues and workarounds differ based on datatypes and the type of encoding used - for example, because Avro doesn't store the datatype anywhere except the schema, it may be easier to convert types there.
 
-**Avro**
+**Avro and working around its length-indicator-only encoding**
 
 ![Avro evolution](https://notes.shichao.io/dda/figure_4-6_600.png)
 
