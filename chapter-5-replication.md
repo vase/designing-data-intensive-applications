@@ -68,4 +68,4 @@ Some solutions to the problem:
 
 ### Leaderless Replication
 - Most famous example of this is Amazon's DynamoDB. Other examples are Cassandra and Riak.
-- Important concept is quorom. Writes are sent to all instances, and based on the configured quorom, the write is accepted or not.
+- Important concept is quorum. Writes are sent to all instances, and based on the configured quorum, the write is accepted or not.
