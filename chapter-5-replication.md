@@ -34,6 +34,10 @@ Every write needs to be processed by every replica, so how to distribute writes?
 - Multi-leader
 - Leaderless
 
+Key deliverable for replication: All replicas must end up with the **same** data on them as the leader and each other.
+
+
+### Leader(ful?) Replication
 Two types of failure:
 - **Follower failure**: Catch-up once the follower recovers
 - **Leader failure**: Failover, elect one of the remaining followers as new leader. This is generally very complicated and has huge margins for error. Common errors include not being able to detect when a leader has actually failed, _split brain_, dropping writes in case the newly elected leader has out-of-date data etc.
@@ -45,3 +49,23 @@ Replication logs have multiple types of implementation too:
 - Trigger-based replication = Replication implemented in app code.
 
 #### Multi-leader replication
+
+##### Multi-datacenter operation
+- Each DC would have it's own leader.
+- Higher fault-tolerance, whole system doesn't go down just because one leader goes down. Other DCs can temporarily be secondaries to one DCs leader.
+- Better write performance.
+
+**Key Problem**: Write conflicts between leaders
+Some solutions to the problem:
+- Avoid conflict. If you can make sure all writes for a user go to a "home" datacenter, you don't need to handle conflict. But this is basically creating a separate DB system for each region in this case.
+- Build convergence to a consistent state into the conflict resolution logic. Some ways for convergence include giving a unique ID to each write, and merge values together, or just throw away data that has less than the latest write ID.
+- Use Conflict-Free Replicated Datatypes (CRDTs) (like Oprational transform)
+
+#### Multi-leader write distribution
+- Circular topology = leaders pass on writes to other leaders
+- Star topology = Designated root passes on writes to all other leaders
+- All-to-all topology (most common) = all leaders send writes to all other leaders.
+
+### Leaderless Replication
+- Most famous example of this is Amazon's DynamoDB. Other examples are Cassandra and Riak.
+- Important concept is quorom. Writes are sent to all instances, and based on the configured quorom, the write is accepted or not.
